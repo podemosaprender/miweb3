@@ -98,11 +98,20 @@
     </b-form>
   </div>      
 
+        <b-table striped hover :items="items"></b-table>
+
       </b-container>
     </div>
 
 <!-- Start running your app -->
     <script>
+const itemsQueConseguiDeOtroLado = [
+  { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+  { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+  { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+  { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+];
+
       window.app = new Vue({
         el: "#app",
       data () {
@@ -117,7 +126,8 @@
         { text: 'Select One', value: null },
         'Carrots', 'Beans', 'Tomatoes', 'Corn', 'Asado'
       ],
-      show: true
+      show: true,
+      items: itemsQueConseguiDeOtroLado
     }
   },
   methods: {
