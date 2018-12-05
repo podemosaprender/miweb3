@@ -9,12 +9,43 @@
 <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 </head>
 <body>
+    <!-- Our application root element -->
+    <div id="app">
+      <b-container>
+        <b-jumbotron header="Bootstrap Vue"
+                     lead="Bootstrap 4 Components for Vue.js 2"
+        >
+          <p>For more information visit our website</p>
+          <b-btn variant="primary" href="https://bootstrap-vue.js.org/">More Info</b-btn>
+        </b-jumbotron>
 
-<b-jumbotron header="Bootstrap Vue" lead="Bootstrap 4 Components for Vue.js 2" >
-  <p>For more information visit website</p>
-  <b-btn variant="primary" href="#">More Info</b-btn>
-</b-jumbotron>
+        <b-form-group horizontal
+                      :label-cols="4"
+                      description="Let us know your name."
+                      label="Enter your name"
+        >
+           <b-form-input v-model.trim="name"></b-form-input>
+        </b-form-group>
 
-<!-- jumbotron-1.vue -->
+        <b-alert variant="success" :show="showAlert">
+          Hello {{ name }}
+        </b-alert>
+      </b-container>
+    </div>
+
+<!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: "#app",
+        data: {
+          name: ''
+        },
+        computed: {
+          showAlert() {
+            return this.name.length > 4 ? true : false;
+          }
+        }
+      })
+    </script>
 </body>
 </html>
