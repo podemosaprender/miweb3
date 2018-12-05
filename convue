@@ -1,0 +1,20 @@
+<html>
+<head>
+<!-- Add this to <head> -->
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+
+<!-- Add this after vue.js -->
+<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+</head>
+<body>
+
+<b-jumbotron header="Bootstrap Vue" lead="Bootstrap 4 Components for Vue.js 2" >
+  <p>For more information visit website</p>
+  <b-btn variant="primary" href="#">More Info</b-btn>
+</b-jumbotron>
+
+<!-- jumbotron-1.vue -->
+</body>
+</html>
