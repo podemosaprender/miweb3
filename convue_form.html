@@ -11,8 +11,6 @@
 <body>
     <!-- Our application root element -->
     <div id="app">
-<template>
-  <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group id="exampleInputGroup1"
                     label="Email address:"
@@ -53,11 +51,15 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-  </div>
-</template>
 
-<script>
-export default {
+<!-- b-form-1.vue -->    
+
+</div>
+
+<!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: "#app",
   data () {
     return {
       form: {
@@ -90,25 +92,7 @@ export default {
       this.$nextTick(() => { this.show = true });
     }
   }
-}
-</script>
 
-<!-- b-form-1.vue -->    
-
-</div>
-
-<!-- Start running your app -->
-    <script>
-      window.app = new Vue({
-        el: "#app",
-        data: {
-          name: ''
-        },
-        computed: {
-          showAlert() {
-            return this.name.length > 4 ? true : false;
-          }
-        }
       })
     </script>
 </body>
