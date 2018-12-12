@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache"> <!-- A: asi se refresca cuando modifico archivo -->
+
+<!-- VER: https://bootstrap-vue.js.org/docs/components/ -->
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+<!-- para traer datos de API y otros sitios VER: https://github.com/axios/axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <!-- Our application root element -->
+    <div id="app">
+      <b-container>
+
+
+     <b-table striped hover :items="items"></b-table>
+
+      </b-container>
+    </div>
+
+<!-- Start running your app -->
+    <script>
+
+/* VER: API de blogger, FROM: https://feed.mikle.com/support/google-blogger-rss/
+
+Full site feed:
+Atom 1.0: https://blogname.blogspot.com/feeds/posts/default
+
+Comments-only feed:
+Atom 1.0: https://blogname.blogspot.com/feeds/comments/default
+
+Label-specific site feed:
+To get a feed for a specific label, change [label].
+
+Atom 1.0: https://blogname.blogspot.com/feeds/posts/default/-/[label]
+
+Individual post comment feed:
+Note: You can find the postId of an individual post from the Posting > ‘Edit Posts’ tab. Simply mouseover the ‘Edit’ link next to a particular post, and that postId will be displayed in your browser’s status bar.
+
+Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
+
+*/
+
+const itemsQueConseguiDeOtroLado = [
+  { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+  { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+  { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+  { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+];
+      window.app = new Vue({
+        el: "#app",
+      data () {
+    return {
+      items: itemsQueConseguiDeOtroLado
+    }
+  },
+  
+  })
+    </script>
+</body>
+</html>
