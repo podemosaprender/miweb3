@@ -55,6 +55,7 @@ window.app = new Vue({
         let promise = axios.get('https://cors-anywhere.herokuapp.com/https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
 
         return promise.then((data) => {
+          window.XDATA= data;
           return(data.items)
         }).catch(error => {
           return []
