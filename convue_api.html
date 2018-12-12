@@ -21,7 +21,7 @@
 
           <b-table id="my-table" :fields="fields" :items="itemsTraidosDeBlogger" :busy.sync="isBusy" no-provider-sorting no-provider-filtering no-provider-paging>
             <template slot="link" slot-scope="data">
-                <a :href="`#${data.value}`">
+                <a :href="data.value">
                     {{data.value}}
                 </a>
             </template>
