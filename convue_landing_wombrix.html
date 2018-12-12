@@ -1,0 +1,39 @@
+<html>
+<head>
+<!-- VER: https://bootstrap-vue.js.org/docs/components/ -->
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+</head>
+<body>
+    <!-- Our application root element -->
+    <div id="app">
+      <b-container>
+        <b-jumbotron header="Wombrix"
+                     lead="Robot y proyecto didáctico"
+        >
+          <p>Estamos preparando nuestro sitio!</p>
+        </b-jumbotron>
+
+      <div>
+        <b-embed type="iframe"
+                 aspect="16by9"
+                 src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+                 allowfullscreen
+        ></b-embed>
+      </div>
+
+      </b-container>
+    </div>
+
+<!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: "#app",
+      })
+    </script>
+</body>
+</html>
