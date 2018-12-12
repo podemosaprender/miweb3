@@ -47,17 +47,17 @@ Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
 
 */
 
-function entry_kv_blogger(e0) { 
-    console.log("E0",e0);
-    e1= { //U: una entrada del feed de blogger a un kv simple y que se ve en b-table
-    titulo: e0.title.$t,
-    tags: e0.category ? e0.category.map(e => e.term).join(", ") : "",
-    updated: e0.updated.$t,
-    link: e0.link.find(e => e.rel=="alternate").href,
-    id: e0.id,
-    content: e0.content, //U: el contenido del post, en html
+function entry_kv_blogger(e0) { //U: una entrada del feed de blogger a un kv simple y que se ve en b-table
+    //DBG console.log("E0",e0);
+    let e1= { 
+        titulo: e0.title.$t,
+        tags: e0.category ? e0.category.map(e => e.term).join(", ") : "",
+        updated: e0.updated.$t,
+        link: e0.link.find(e => e.rel=="alternate").href,
+        id: e0.id.$t,
+        content: e0.content, //U: el contenido del post, en html
     }
-    console.log("E1",e1);
+    //DBG console.log("E1",e1);
     return e1;
 }
                                
