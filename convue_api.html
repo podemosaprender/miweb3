@@ -50,11 +50,6 @@ Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
 //FROM: axios + tabla bootstrap, https://bootstrap-vue.js.org/docs/components/table/
 window.app = new Vue({
     el: "#app",
-    data () {
-      return {
-        isBusy: false
-      }
-    }
     methods: {
       myProvider (ctx) {
         let promise = axios.get('https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
