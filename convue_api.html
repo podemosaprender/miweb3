@@ -56,7 +56,7 @@ window.app = new Vue({
 
         return promise.then((data) => {
           window.XDATA= data;
-          return(data.items)
+          return([])
         }).catch(error => {
           return []
         })
