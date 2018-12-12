@@ -52,7 +52,7 @@ window.app = new Vue({
     el: "#app",
     methods: {
       myProvider (ctx) {
-        let promise = axios.get('https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
+        let promise = axios.get('https://cors-anywhere.herokuapp.com/https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
 
         return promise.then((data) => {
           return(data.items)
