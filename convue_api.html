@@ -20,6 +20,10 @@
           <h2>Posts del blog de Podemos Aprender</h2>
 
           <b-table id="my-table" :fields="fields" :items="itemsTraidosDeBlogger" :busy.sync="isBusy" no-provider-sorting no-provider-filtering no-provider-paging>
+            <template slot="img" slot-scope="data">
+                <img :src="data.value" style="width: 60px; height: 60px;">
+            </template>
+
             <template slot="link" slot-scope="data">
                 <a :href="data.value">
                     {{data.value}}
@@ -55,6 +59,7 @@ Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
 
 function entry_kv_blogger(e0) { //U: una entrada del feed de blogger a un kv simple y que se ve en b-table
     //DBG console.log("E0",e0);
+    let img= x.content.$t.match("<img .*?src=\"([^\"]*)"); 
     let e1= { 
         titulo: e0.title.$t,
         tags: e0.category ? e0.category.map(e => e.term).join(", ") : "",
@@ -62,6 +67,7 @@ function entry_kv_blogger(e0) { //U: una entrada del feed de blogger a un kv sim
         link: e0.link.find(e => e.rel=="alternate").href,
         id: e0.id.$t,
         content: e0.content, //U: el contenido del post, en html
+        img: img && img[1], //U: la url de la primera imagen
     }
     //DBG console.log("E1",e1);
     return e1;
@@ -74,6 +80,7 @@ window.app = new Vue({
       return {
         isBusy: false,
         fields: [
+            { key: 'img'},
             { key: 'titulo', sortable: true },
             { key: 'tags', sortable: false },
             { key: 'updated', sortable: true },
