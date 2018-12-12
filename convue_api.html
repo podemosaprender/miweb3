@@ -19,7 +19,7 @@
       <b-container>
 
 
-     <b-table striped hover :items="items"></b-table>
+     <b-table id="my-table" :items="myProvider" ></b-table>
 
       </b-container>
     </div>
@@ -47,21 +47,26 @@ Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
 
 */
 
-const itemsQueConseguiDeOtroLado = [
-  { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-  { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-  { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-  { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-];
-      window.app = new Vue({
-        el: "#app",
-      data () {
-    return {
-      items: itemsQueConseguiDeOtroLado
+//FROM: axios + tabla bootstrap, https://bootstrap-vue.js.org/docs/components/table/
+window.app = new Vue({
+    el: "#app",
+    data () {
+      return {
+        isBusy: false
+      }
     }
-  },
-  
-  })
+    methods: {
+      myProvider (ctx) {
+        let promise = axios.get('https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
+
+        return promise.then((data) => {
+          return(data.items)
+        }).catch(error => {
+          return []
+        })
+      }
+    }
+  });
     </script>
 </body>
 </html>
