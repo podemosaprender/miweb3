@@ -59,7 +59,7 @@ Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
 
 function entry_kv_blogger(e0) { //U: una entrada del feed de blogger a un kv simple y que se ve en b-table
     //DBG console.log("E0",e0);
-    let img= x.content.$t.match("<img .*?src=\"([^\"]*)"); 
+    let img= e0.content.$t.match("<img .*?src=\"([^\"]*)"); 
     let e1= { 
         titulo: e0.title.$t,
         tags: e0.category ? e0.category.map(e => e.term).join(", ") : "",
