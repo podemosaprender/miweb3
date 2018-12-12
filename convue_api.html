@@ -19,7 +19,13 @@
       <b-container>
           <h2>Posts del blog de Podemos Aprender</h2>
 
-          <b-table id="my-table" :fields="fields" :items="itemsTraidosDeBlogger" :busy.sync="isBusy" no-provider-sorting no-provider-filtering no-provider-paging></b-table>
+          <b-table id="my-table" :fields="fields" :items="itemsTraidosDeBlogger" :busy.sync="isBusy" no-provider-sorting no-provider-filtering no-provider-paging>
+            <template slot="link" slot-scope="data">
+                <a :href="`#${data.value}`">
+                    {{data.value}}
+                </a>
+            </template>
+          </b-table>
 
       </b-container>
     </div>
