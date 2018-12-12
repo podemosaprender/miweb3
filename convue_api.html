@@ -47,6 +47,14 @@ Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
 
 */
 
+function entry_kv_blogger(e0) { return { //U: una entrada del feed de blogger a un kv simple y que se ve en b-table
+    titulo: e0.title.$t,
+    tags: e0.category.map(e => e.term),
+    updated: e0.updated.$t,
+    link: e0.link.find(e => e.rel=="alternate").href,
+    id: e0.id,
+}}
+                               
 //FROM: axios + tabla bootstrap, https://bootstrap-vue.js.org/docs/components/table/
 window.app = new Vue({
     el: "#app",
@@ -55,9 +63,8 @@ window.app = new Vue({
         let promise = axios.get('https://cors-anywhere.herokuapp.com/https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
 
         return promise.then((data) => {
-          //DBG: 
-          window.XDATA= data; return([]); //U: Asi hice disponible el resultado en la consola para debuggear
-          return(data.data.feed.entry);
+          //DBG: window.XDATA= data; return([]); //U: Asi hice disponible el resultado en la consola para debuggear
+          return(data.data.feed.entry.map(entry_kv_blogger);
         }).catch(error => {
           return []
         })
