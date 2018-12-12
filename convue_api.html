@@ -17,9 +17,9 @@
     <!-- Our application root element -->
     <div id="app">
       <b-container>
+          <h2>Posts del blog de Podemos Aprender</h2>
 
-
-     <b-table id="my-table" :items="myProvider" ></b-table>
+          <b-table id="my-table" :items="itemsTraidosDeBlogger" :busy.sync="isBusy" no-provider-sorting="true" no-provider-filtering="true" no-provider-paging="true"></b-table>
 
       </b-container>
     </div>
@@ -63,15 +63,19 @@ function entry_kv_blogger(e0) {
 //FROM: axios + tabla bootstrap, https://bootstrap-vue.js.org/docs/components/table/
 window.app = new Vue({
     el: "#app",
+    data: function () {
+      return {
+        isBusy: false
+      }
+    },
     methods: {
-      myProvider (ctx) {
+      itemsTraidosDeBlogger (ctx) { //U: trae los items de blogger y los formatea para b-table
         let promise = axios.get('https://cors-anywhere.herokuapp.com/https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
 
         return promise.then((data) => {
           //DBG: window.XDATA= data; return([]); //U: Asi hice disponible el resultado en la consola para debuggear
-          window.XDATA= data.data.feed.entry;
-          window.XDATA1= data.data.feed.entry.map(entry_kv_blogger);
-          return(XDATA1);
+          let a_kv_para_tabla= data.data.feed.entry.map(entry_kv_blogger);
+          return(a_kv_para_tabla);
         }).catch(error => {
           return []
         })
