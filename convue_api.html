@@ -64,7 +64,7 @@ window.app = new Vue({
 
         return promise.then((data) => {
           //DBG: window.XDATA= data; return([]); //U: Asi hice disponible el resultado en la consola para debuggear
-          return(data.data.feed.entry.map(entry_kv_blogger);
+          return(data.data.feed.entry.map(entry_kv_blogger));
         }).catch(error => {
           return []
         })
