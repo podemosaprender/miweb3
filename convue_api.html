@@ -47,13 +47,18 @@ Atom 1.0: https://blogname.blogspot.com/feeds/postId/comments/default
 
 */
 
-function entry_kv_blogger(e0) { return { //U: una entrada del feed de blogger a un kv simple y que se ve en b-table
+function entry_kv_blogger(e0) { 
+    console.log("E0",e0);
+    e1= { //U: una entrada del feed de blogger a un kv simple y que se ve en b-table
     titulo: e0.title.$t,
     tags: e0.category.map(e => e.term),
     updated: e0.updated.$t,
     link: e0.link.find(e => e.rel=="alternate").href,
     id: e0.id,
-}}
+    }
+    console.log("E1",e1);
+    return e1;
+}
                                
 //FROM: axios + tabla bootstrap, https://bootstrap-vue.js.org/docs/components/table/
 window.app = new Vue({
@@ -64,7 +69,9 @@ window.app = new Vue({
 
         return promise.then((data) => {
           //DBG: window.XDATA= data; return([]); //U: Asi hice disponible el resultado en la consola para debuggear
-          return(data.data.feed.entry.map(entry_kv_blogger));
+          window.XDATA= data.data.feed.entry;
+          window.XDATA1= data.data.feed.entry.map(entry_kv_blogger);
+          return(XDATA1);
         }).catch(error => {
           return []
         })
