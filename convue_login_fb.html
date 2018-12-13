@@ -72,16 +72,17 @@ window.app = new Vue({
   methods: {
     //VER: https://developers.facebook.com/docs/graph-api/reference/user
     onSignInSuccess: function (response) {
+      let my= this;
       FB.api('/me?fields=name,email,location', function (dude) {
         console.log("Good to see you",{dude});
-        this.loginStsMsg= "Ok: "+JSON.stringify(dude);
-        this.loginSts= "success";
+        my.loginStsMsg= "Ok: "+JSON.stringify(dude);
+        my.loginSts= "success";
       })
     },
     onSignInError: function (error) {
         console.log('OH NOES', error);
-        this.loginStsMsg= "Ok: "+JSON.stringify(error);
-        this.loginSts= "error";
+        my.loginStsMsg= "ERROR: "+JSON.stringify(error);
+        my.loginSts= "error";
     }
   }  
 });
