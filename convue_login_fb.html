@@ -13,7 +13,9 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <!-- login con fb -->
+<!-- VER: https://github.com/phanan/vue-facebook-signin-button -->
 <script src="vue-facebook-signin-button.min.js"></script>
+
 </head>
 <body>
     <!-- Our application root element -->
@@ -21,12 +23,17 @@
       <b-container>
           <h2>Login en FB de Podemos Aprender</h2>
 
+  <b-btn>
   <fb-signin-button
     :params="fbSignInParams"
     @success="onSignInSuccess"
     @error="onSignInError">
     Sign in with Facebook
   </fb-signin-button>
+  </b-btn>
+
+  <b-alert :variant="loginSts" show>{{loginStsMsg}}</b-alert>
+
 
       </b-container>
     </div>
@@ -55,19 +62,26 @@ window.app = new Vue({
   data: function () {
     return {
       fbSignInParams: {
-        scope: 'email,user_likes',
+        scope: 'email,user_likes,location',
         return_scopes: true
-      }
+      },
+      loginStsMsg: "Esperando login",
+      loginSts: "warning"
     }
   },
   methods: {
+    //VER: https://developers.facebook.com/docs/graph-api/reference/user
     onSignInSuccess: function (response) {
-      FB.api('/me', function (dude) {
-        console.log(`Good to see you, ${dude.name}.`)
+      FB.api('/me?fields=name,email,location', function (dude) {
+        console.log("Good to see you",{dude});
+        this.loginStsMsg= "Ok: "+JSON.stringify(dude);
+        this.loginSts= "success";
       })
     },
     onSignInError: function (error) {
-      console.log('OH NOES', error)
+        console.log('OH NOES', error);
+        this.loginStsMsg= "Ok: "+JSON.stringify(error);
+        this.loginSts= "error";
     }
   }  
 });
