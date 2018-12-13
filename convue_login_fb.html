@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache"> <!-- A: asi se refresca cuando modifico archivo -->
+
+<!-- VER: https://bootstrap-vue.js.org/docs/components/ -->
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+<!-- para traer datos de API y otros sitios VER: https://github.com/axios/axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <!-- Our application root element -->
+    <div id="app">
+      <b-container>
+          <h2>Login en FB de Podemos Aprender</h2>
+
+<template>
+  <fb-signin-button
+    :params="fbSignInParams"
+    @success="onSignInSuccess"
+    @error="onSignInError">
+    Sign in with Facebook
+  </fb-signin-button>
+</template>
+
+
+      </b-container>
+    </div>
+
+<!-- Start running your app -->
+    <script>
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,  // enable cookies to allow the server to access the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
+  };
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+window.app = new Vue({
+    el: "#app",
+  data: function () {
+    return {
+      fbSignInParams: {
+        scope: 'email,user_likes',
+        return_scopes: true
+      }
+    }
+  },
+  methods: {
+    onSignInSuccess: function (response) {
+      FB.api('/me', function (dude) {
+        console.log(`Good to see you, ${dude.name}.`)
+      })
+    },
+    onSignInError: function (error) {
+      console.log('OH NOES', error)
+    }
+  }  
+});
+</script>
+</body>
+</html>
