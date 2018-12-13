@@ -15,6 +15,7 @@
 <!-- login con fb -->
 <!-- VER: https://github.com/phanan/vue-facebook-signin-button -->
 <script src="vue-facebook-signin-button.min.js"></script>
+<script src="vue-google-signin-button.min.js"></script>
 
 </head>
 <body>
@@ -30,6 +31,15 @@
     @error="onSignInError">
     Sign in with Facebook
   </fb-signin-button>
+  </b-btn>
+
+  <b-btn>
+  <g-signin-button
+    :params="googleSignInParams"
+    @success="onSignInSuccessGoog"
+    @error="onSignInErrorGoog">
+    Sign in with Google
+  </g-signin-button>
   </b-btn>
 
   <b-alert :variant="loginSts" show>{{loginStsMsg}}</b-alert>
@@ -65,24 +75,41 @@ window.app = new Vue({
         scope: 'email,user_likes',
         return_scopes: true
       },
+      googleSignInParams: {
+        client_id: '600035504048-6ned4ehcd2mc51jk92njkr4rmtdefbtv.apps.googleusercontent.com'
+      }
       loginStsMsg: "Esperando login",
       loginSts: "warning"
     }
   },
   methods: {
     //VER: https://developers.facebook.com/docs/graph-api/reference/user
-    onSignInSuccess: function (response) {
-      let my= this;
+    onSignInSuccess: function (response) { let my= this;
       FB.api('/me?fields=name,email,location', function (dude) {
         console.log("Good to see you",{dude});
         my.loginStsMsg= "Ok: "+JSON.stringify(dude);
         my.loginSts= "success";
       })
     },
-    onSignInError: function (error) {
+    onSignInError: function (error) {  let my= this;
         console.log('OH NOES', error);
         my.loginStsMsg= "ERROR: "+JSON.stringify(error);
         my.loginSts= "error";
+    },
+    onSignInSuccessGoog (googleUser) {  let my= this;
+      // `googleUser` is the GoogleUser object that represents the just-signed-in user.
+      // See https://developers.google.com/identity/sign-in/web/reference#users
+      const dude = googleUser.getBasicProfile();
+        console.log("Good to see you",{dude});
+        my.loginStsMsg= "Ok: "+JSON.stringify(dude);
+        my.loginSts= "success";
+
+    },
+    onSignInErrorGoog (error) {  let my= this;
+      // `error` contains any error occurred.
+      console.log('OH NOES', error)
+      my.loginStsMsg= "ERROR: "+JSON.stringify(error);
+      my.loginSts= "error";
     }
   }  
 });
