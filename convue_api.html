@@ -94,7 +94,8 @@ window.app = new Vue({
         let promise = axios.get('https://cors-anywhere.herokuapp.com/https://pizarra.podemosaprender.org/feeds/posts/default?alt=json') //A: de blogger como json
 
         return promise.then((data) => {
-          //DBG: window.XDATA= data; return([]); //U: Asi hice disponible el resultado en la consola para debuggear
+          //DBG: 
+          window.XDATA= data; // return([]); //U: Asi hice disponible el resultado en la consola para debuggear
           let a_kv_para_tabla= data.data.feed.entry.map(entry_kv_blogger);
           return(a_kv_para_tabla);
         }).catch(error => {
